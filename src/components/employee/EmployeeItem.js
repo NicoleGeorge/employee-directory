@@ -2,36 +2,47 @@ import React, { Component } from 'react';
 
 class EmployeeItems extends Component {
   state = {
-      loading: true,
-      person: null
-    }
-  
-    async componentDidMount() {
-      const url = "https://api.randomuser.me/";
-      const response = await fetch(url);
-      const data = await response.json();
-      // console.log(data.results) working!!!
-      this.setState({ person: data.results[0], loading: false }) 
-      // console.log(data.results[0]); connecting
-    }
+    loading: true,
+    person: null,
+  };
+
+  async componentDidMount() {
+    const url = 'https://api.randomuser.me/';
+    const response = await fetch(url);
+    const data = await response.json();
+    // console.log(data.results) working!!!
+    this.setState({ person: data.results[0], loading: false });
+    // console.log(data.results[0]); connecting woot-woot
+  }
 
   render() {
+    const { loading, person } = this.state;
 
-    if (this.state.loading) {
-      return <div>loading...please wait </div>
+    if (loading) {
+      return <div>loading eployee directory...please wait </div>;
     }
 
-    if (!this.state.person) {
-      return <div> don't have an employee available</div>
+    if (!person) {
+      return <div> don't have an employee available</div>;
     }
 
     return (
-      <div>
-          <img src = { this.state.person.picture.large} alt = ''/>
-          <div>{ this.state.person.name.first} { this.state.person.name.last}</div>
-          <div>{ this.state.person.location.state}, { this.state.person.location.country} </div>
-          <div>email: { this.state.person.email}</div>
-      </div>    
+      <div className='card text-center'>
+        <img
+          src={person.picture.large}
+          alt=''
+          className = 'profile-pic'
+          style={{ width: '120px' }}
+        />
+        <h3>
+          {person.name.first} {person.name.last}
+        </h3>
+        <h5>
+          {person.location.state},
+          {person.location.country}
+        </h5>
+        <div>email: {person.email}</div>
+      </div>
     );
   }
 }

@@ -1,5 +1,14 @@
-body {
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.card {
+    padding: 1rem;
+    /* border: pink 2px solid; */
+    margin: 0.7rem 0;
 }
 
-code {
+.profile-pic {
+    width: 50%;
+}
+.text-center {
+    text-align: center;
 }
