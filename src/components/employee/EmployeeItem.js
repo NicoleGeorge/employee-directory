@@ -16,20 +16,22 @@ class EmployeeItems extends Component {
     }
 
   render() {
+
+    if (this.state.loading) {
+      return <div>loading...please wait </div>
+    }
+
+    if (!this.state.person) {
+      return <div> don't have an employee available</div>
+    }
+
     return (
-    <div>
-      {this.state.loading || !this.state.person ? (
-        <div>loading...please wait </div>
-      ) : (
-        <div>
-          <div>{ this.state.person.name.first}</div>
-          <div>{ this.state.person.name.last}</div>
-          <div>{ this.state.person.location.state}</div>
-          <div>{ this.state.person.location.country}</div>
-          <div>{ this.state.person.email}</div>
-        </div>
-      )}
-      </div>
+      <div>
+          <img src = { this.state.person.picture.large} alt = ''/>
+          <div>{ this.state.person.name.first} { this.state.person.name.last}</div>
+          <div>{ this.state.person.location.state}, { this.state.person.location.country} </div>
+          <div>email: { this.state.person.email}</div>
+      </div>    
     );
   }
 }
