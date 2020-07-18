@@ -1,46 +1,24 @@
 import React, { Component } from 'react';
 
 class EmployeeItems extends Component {
-  state = {
-    loading: true,
-    person: null,
-  };
-
-  async componentDidMount() {
-    const url = 'https://api.randomuser.me?results=12';
-    const response = await fetch(url);
-    const data = await response.json();
-    // console.log(data.results) working!!!
-    this.setState({ person: data.results[0], loading: false });
-    // console.log(data.results[0]); connecting woot-woot
-  }
 
   render() {
-    const { loading, person } = this.state;
-
-    if (loading) {
-      return <div>loading eployee directory...please wait </div>;
-    }
-
-    if (!person) {
-      return <div> don't have an employee available</div>;
-    }
 
     return (
       <div className='card text-center'>
         <img
-          src={person.picture.large}
+          src={this.props.employee.picture}
           alt=''
           className='profile-pic'
           style={{ width: '120px' }}
         />
         <h3>
-          {person.name.first} {person.name.last}
+          {this.props.employee.name}
         </h3>
         <h5>
-          {person.location.state},{person.location.country}
+          {this.props.employee.state}, {this.props.employee.country}
         </h5>
-        <div>email: {person.email}</div>
+        <div>email: {this.props.employee.email}</div>
       </div>
     );
   }

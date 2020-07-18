@@ -7,22 +7,60 @@ import './App.css';
 
 class App extends Component {
   state = {
-    person: [],
-    loading: false
+    employees: [],
+
+    filteredEmployees: [],
+    loading: false,
   };
 
+
+
   async componentDidMount() {
-    const res = await axios.get('https://api.randomuser.me');
+    const res = await axios.get('https://randomuser.me/api?results=12');
 
     console.log(res.data);
+
+    const converted = res.data.results.map((user) => {
+      return {
+        name: `${user.name.first} ${user.name.last}`,
+        state: user.location.state,
+        country: user.location.country,
+        email: user.email,
+        picture: user.picture.large,
+      };
+    });
+
+    this.setState({
+      employees: converted,
+      filteredEmployees: converted,
+    });
   }
+
+  searchEmployees = (event) => {
+    console.log(event.target.value);
+
+    const filtered = this.state.employees.filter((employee) => {
+      return employee.name.toLowerCase().includes(event.target.value.toLowerCase())
+
+    })
+
+    this.setState( {
+      filteredEmployees: filtered
+    });
+
+
+  };
+
   render() {
     return (
       <div className='App'>
-        <Navbar title='Employee Directory' />
+        <Navbar title='Employee Directory'  />
         <div className='container'>
-          <Search />
-          <Employees loading={this.state.loading} person={this.state.person} />
+          <Search searchEmployees={this.searchEmployees} />
+          <Employees
+            loading={this.state.loading}
+            employees={this.state.filteredEmployees}
+          />
         </div>
       </div>
     );

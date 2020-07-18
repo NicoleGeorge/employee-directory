@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
 
 export class Search extends Component {
-  state = {
-    text: '',
+
+
+  //   onSubmit method to search from an employee
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    // console.log(this.state.text);
   };
 
-  onChange = (e) => {
-      this.setState({ text: e.target.value });
-  }
+  //   search bar is writable
+  onChange = (e) => this.setState({ text: e.target.value });
 
   render() {
     return (
       <div>
-        <form className=''></form>
+        <form onSubmit={this.onSubmit} className=''></form>
         <input
           type='text'
           name='text'
           placeholder='Seatch for employee...'
-          value={this.state.text}
-          onChange = {this.onChange}
+          onChange={this.props.searchEmployees}
         />
         <input
           type='submit'
