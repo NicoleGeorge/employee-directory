@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import EmployeeItems from './EmployeeItem';
 
 class Employees extends Component {
   state = {
@@ -30,9 +31,10 @@ class Employees extends Component {
     return (
       <div>
         {this.state.employees.map((employee) => (
-          <div>
-            {employee.name.first} {employee.name.last}
-          </div>
+          <EmployeeItems key = {employee.email} employee = {employee} />
+          // <div key = {employee.email}>
+          //   {employee.email}
+          // </div>
         ))}
       </div>
     );
