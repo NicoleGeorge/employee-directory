@@ -7,7 +7,7 @@ class EmployeeItems extends Component {
   };
 
   async componentDidMount() {
-    const url = 'https://api.randomuser.me';
+    const url = 'https://api.randomuser.me?results=12';
     const response = await fetch(url);
     const data = await response.json();
     // console.log(data.results) working!!!
@@ -31,15 +31,14 @@ class EmployeeItems extends Component {
         <img
           src={person.picture.large}
           alt=''
-          className = 'profile-pic'
+          className='profile-pic'
           style={{ width: '120px' }}
         />
         <h3>
           {person.name.first} {person.name.last}
         </h3>
         <h5>
-          {person.location.state},
-          {person.location.country}
+          {person.location.state},{person.location.country}
         </h5>
         <div>email: {person.email}</div>
       </div>
